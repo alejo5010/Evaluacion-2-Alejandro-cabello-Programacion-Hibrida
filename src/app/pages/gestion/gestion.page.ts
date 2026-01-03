@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'; // 1. Importa esto
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { CitasService } from '../../services/citas.service';
@@ -10,7 +10,13 @@ import { CitaListComponent } from '../../components/cita-list/cita-list.componen
   selector: 'app-gestion',
   templateUrl: './gestion.page.html',
   standalone: true,
-  imports: [IonicModule, CommonModule, CitaFormComponent, CitaListComponent]
+  imports: [
+    IonicModule, 
+    CommonModule, 
+    CitaFormComponent, 
+    CitaListComponent
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA] // 2. AGREGA ESTA LÍNEA
 })
 export class GestionPage implements OnInit {
   listaCitas: Cita[] = [];
@@ -23,11 +29,12 @@ export class GestionPage implements OnInit {
 
   agregarNuevaCita(cita: Cita) {
     this.citasService.agregarCita(cita);
-    this.listaCitas = this.citasService.obtenerCitas(); // Actualizamos la lista
+    // IMPORTANTE: Para que el [citas] del HTML se entere del cambio:
+    this.listaCitas = [...this.citasService.obtenerCitas()];
   }
 
   borrarCita(cita: Cita) {
     this.citasService.eliminarCita(cita);
-    this.listaCitas = this.citasService.obtenerCitas(); // Actualizamos la lista
+    this.listaCitas = [...this.citasService.obtenerCitas()];
   }
 }

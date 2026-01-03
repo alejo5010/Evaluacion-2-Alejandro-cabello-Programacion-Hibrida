@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { Cita } from '../../models/cita.model';
+import { Cita } from '../../models/cita.model'; 
 
 @Component({
   selector: 'app-cita-form',

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { cita } from '../models/cita.model';
+import { Cita } from '../models/cita.model';
 
 @Injectable({
   providedIn: 'root'
