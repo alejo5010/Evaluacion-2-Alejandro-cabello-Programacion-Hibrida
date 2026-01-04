@@ -1,16 +1,29 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Cita del Día</ion-title>
+    <ion-title>Inicio</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding ion-text-center">
+  
   <ion-card *ngIf="citaAleatoria">
     <ion-card-header>
       <ion-card-title>"{{ citaAleatoria.frase }}"</ion-card-title>
       <ion-card-subtitle>- {{ citaAleatoria.autor }}</ion-card-subtitle>
     </ion-card-header>
   </ion-card>
-  
-  <p *ngIf="!citaAleatoria">No hay citas disponibles.</p>
+
+  <ion-button 
+    *ngIf="citasService.borrarEnInicio" 
+    color="danger" 
+    fill="outline" 
+    (click)="borrarCitaActual()">
+    <ion-icon name="trash-outline" slot="start"></ion-icon>
+    Eliminar esta cita
+  </ion-button>
+
+  <ion-button expand="block" fill="clear" (click)="cambiarCita()">
+    Ver otra cita
+  </ion-button>
+
 </ion-content>

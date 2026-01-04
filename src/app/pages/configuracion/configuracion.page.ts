@@ -11,6 +11,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonToggle, IonLabel, IonIt
   imports: [IonList, IonItem, IonLabel, IonToggle, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class ConfiguracionPage implements OnInit {
+citasService: any;
 
   constructor() { }
 

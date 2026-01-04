@@ -1,9 +1,40 @@
-<ion-card>
+<ion-list>
   <ion-item>
-    <ion-input label="Cita" [(ngModel)]="frase"></ion-input>
+    <ion-label position="stacked">Cita</ion-label>
+    <ion-input 
+      name="frase" 
+      [(ngModel)]="nuevaCita.frase" 
+      #citaModel="ngModel"
+      required 
+      minlength="5" 
+      placeholder="Escriba la frase aquí">
+    </ion-input>
   </ion-item>
+  
+  <ion-text color="danger" *ngIf="citaModel.touched && citaModel.invalid" style="font-size: 12px; padding-left: 16px;">
+    La frase es obligatoria (mínimo 5 letras).
+  </ion-text>
+
   <ion-item>
-    <ion-input label="Autor" [(ngModel)]="autor"></ion-input>
+    <ion-label position="stacked">Autor</ion-label>
+    <ion-input 
+      name="autor" 
+      [(ngModel)]="nuevaCita.autor" 
+      #autorModel="ngModel"
+      required 
+      minlength="2" 
+      placeholder="Nombre del autor">
+    </ion-input>
   </ion-item>
-  <ion-button expand="block" (click)="ejecutarAgregar()">Guardar</ion-button>
-</ion-card>
+
+  <ion-text color="danger" *ngIf="autorModel.touched && autorModel.invalid" style="font-size: 12px; padding-left: 16px;">
+    El autor es obligatorio (mínimo 2 letras).
+  </ion-text>
+</ion-list>
+
+<ion-button 
+  expand="block" 
+  (click)="agregarCita()" 
+  [disabled]="citaModel.invalid || autorModel.invalid">
+  GUARDAR
+</ion-button>

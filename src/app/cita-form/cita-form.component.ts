@@ -1,25 +1,29 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
-import { Cita } from '../models/cita.model';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms'; // Importante para usar ngModel
 
 @Component({
   selector: 'app-cita-form',
-  templateUrl: './cita-form.component.html',
   standalone: true,
-  imports: [IonicModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule], // Solo FormsModule
+  templateUrl: './cita-form.component.html',
 })
 export class CitaFormComponent {
-  frase: string = '';
-  autor: string = '';
+  @Output() onAgregar = new EventEmitter<{frase: string, autor: string}>();
 
-  @Output() onAgregar = new EventEmitter<Cita>();
+  // Objeto simple para guardar lo que se escribe
+  nuevaCita = {
+    frase: '',
+    autor: ''
+  };
 
-  ejecutarAgregar() {
-    if (this.frase && this.autor) {
-      this.onAgregar.emit({ frase: this.frase, autor: this.autor });
-      this.frase = '';
-      this.autor = '';
-    }
+  agregarCita() {
+    // emitir la copia del objeto
+    this.onAgregar.emit({ ...this.nuevaCita });
+    
+    // limpiar los campos después de guardar
+    this.nuevaCita.frase = '';
+    this.nuevaCita.autor = '';
   }
 }

@@ -1,34 +1,23 @@
 <ion-app>
-  <ion-header>
-    <ion-toolbar color="primary">
-      <ion-title>Citas Famosas</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-tabs>
+    
+    <ion-tab-bar slot="bottom">
+      
+      <ion-tab-button tab="inicio" href="/inicio">
+        <ion-icon name="home"></ion-icon>
+        <ion-label>Inicio</ion-label>
+      </ion-tab-button>
 
-  <ion-content>
-    <ion-router-outlet></ion-router-outlet>
-  </ion-content>
+      <ion-tab-button tab="gestion" href="/gestion">
+        <ion-icon name="list"></ion-icon>
+        <ion-label>Gestión</ion-label>
+      </ion-tab-button>
 
-  <ion-footer>
-    <ion-toolbar>
-      <ion-tabs>
-        <ion-tab-bar slot="button">
-          <ion-tab-button tab="inicio" href="/inicio">
-            <ion-icon name="home"></ion-icon>
-            <ion-label>Inicio</ion-label>
-          </ion-tab-button>
-          
-          <ion-tab-button tab="gestion" href="/gestion">
-            <ion-icon name="list"></ion-icon>
-            <ion-label>Gestión</ion-label>
-          </ion-tab-button>
-
-          <ion-tab-button tab="configuracion" href="/configuracion">
-            <ion-icon name="settings"></ion-icon>
-            <ion-label>Configuracion</ion-label>
-          </ion-tab-button>
-        </ion-tab-bar>
-      </ion-tabs>
-    </ion-toolbar>
-  </ion-footer>
+      <ion-tab-button tab="configuracion" href="/configuracion">
+        <ion-icon name="settings"></ion-icon>
+        <ion-label>Configuracion</ion-label>
+      </ion-tab-button>
+      
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-app>
