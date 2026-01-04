@@ -1,0 +1,9 @@
+<ion-content class="ion-padding">
+  <app-cita-form (onAgregar)="alAgregar($event)"></app-cita-form>
+
+  <ion-list-header>
+    <ion-label>Listado de Citas</ion-label>
+  </ion-list-header>
+
+  <app-cita-list [lista]="citasLocales" (onBorrar)="alBorrar($event)"></app-cita-list>
+</ion-content>
