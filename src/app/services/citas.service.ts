@@ -6,6 +6,9 @@ import { Preferences } from '@capacitor/preferences'; // Paso 1: Importar el plu
   providedIn: 'root'
 })
 export class CitasService {
+  cargarTodo() {
+    throw new Error('Method not implemented.');
+  }
 
   private listaCitas: Cita[] = [
     { frase: "El éxito es aprender a ir de fracaso en fracaso sin desesperarse", autor: "Winston Churchill" },
