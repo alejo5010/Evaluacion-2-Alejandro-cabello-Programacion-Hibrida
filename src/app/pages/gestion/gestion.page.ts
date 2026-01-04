@@ -1,10 +1,9 @@
-import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'; // 1. Importa esto
-import { IonicModule } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
+import { CitaFormComponent } from '../../cita-form/cita-form.component';
+import { CitaListComponent } from '../../cita-list/cita-list.component';
 import { CitasService } from '../../services/citas.service';
-import { Cita } from '../../models/cita.model';
-import { CitaFormComponent } from '../../components/cita-form/cita-form.component';
-import { CitaListComponent } from '../../components/cita-list/cita-list.component';
 
 @Component({
   selector: 'app-gestion',
@@ -14,27 +13,14 @@ import { CitaListComponent } from '../../components/cita-list/cita-list.componen
     IonicModule, 
     CommonModule, 
     CitaFormComponent, 
-    CitaListComponent
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA] // 2. AGREGA ESTA LÍNEA
+    CitaListComponent // 
+  ]
 })
 export class GestionPage implements OnInit {
-  listaCitas: Cita[] = [];
-
-  constructor(private citasService: CitasService) {}
-
-  ngOnInit() {
-    this.listaCitas = this.citasService.obtenerCitas();
-  }
-
-  agregarNuevaCita(cita: Cita) {
-    this.citasService.agregarCita(cita);
-    // IMPORTANTE: Para que el [citas] del HTML se entere del cambio:
-    this.listaCitas = [...this.citasService.obtenerCitas()];
-  }
-
-  borrarCita(cita: Cita) {
-    this.citasService.eliminarCita(cita);
-    this.listaCitas = [...this.citasService.obtenerCitas()];
-  }
+  citasLocales: any[] = [];
+  constructor(private servicio: CitasService) {}
+  ngOnInit() { this.actualizar(); }
+  alAgregar(evento: any) { this.servicio.agregarCita(evento); this.actualizar(); }
+  alBorrar(evento: any) { this.servicio.eliminarCita(evento); this.actualizar(); }
+  actualizar() { this.citasLocales = [...this.servicio.obtenerCitas()]; }
 }

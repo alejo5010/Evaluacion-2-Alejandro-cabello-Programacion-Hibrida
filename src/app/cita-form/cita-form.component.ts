@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { Cita } from '../../models/cita.model'; 
+import { Cita } from '../models/cita.model';
 
 @Component({
   selector: 'app-cita-form',
@@ -10,17 +10,16 @@ import { Cita } from '../../models/cita.model';
   imports: [IonicModule, FormsModule]
 })
 export class CitaFormComponent {
-  nuevaFrase: string = '';
-  nuevoAutor: string = '';
+  frase: string = '';
+  autor: string = '';
 
-  @Output() onAgregarCita = new EventEmitter<Cita>();
+  @Output() onAgregar = new EventEmitter<Cita>();
 
-  agregar() {
-    if (this.nuevaFrase.trim() && this.nuevoAutor.trim()) {
-      const nueva: Cita = { frase: this.nuevaFrase, autor: this.nuevoAutor };
-      this.onAgregarCita.emit(nueva);
-      this.nuevaFrase = '';
-      this.nuevoAutor = '';
+  ejecutarAgregar() {
+    if (this.frase && this.autor) {
+      this.onAgregar.emit({ frase: this.frase, autor: this.autor });
+      this.frase = '';
+      this.autor = '';
     }
   }
 }

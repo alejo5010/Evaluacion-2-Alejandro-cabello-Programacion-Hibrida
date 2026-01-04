@@ -1,15 +1,9 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Gestionar Citas</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content class="ion-padding">
-  <app-cita-form (onAgregarCita)="agregarNuevaCita($event)"></app-cita-form>
+  <app-cita-form (onAgregar)="alAgregar($event)"></app-cita-form>
 
   <ion-list-header>
-    <ion-label>Citas Actuales</ion-label>
+    <ion-label>Listado de Citas</ion-label>
   </ion-list-header>
 
-  <app-cita-list [citas]="listaCitas" (onEliminarCita)="borrarCita($event)"></app-cita-list>
+  <app-cita-list [lista]="citasLocales" (onBorrar)="alBorrar($event)"></app-cita-list>
 </ion-content>

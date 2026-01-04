@@ -1,15 +1,9 @@
 <ion-card>
-  <ion-card-content>
-    <ion-item>
-      <ion-label position="floating">Frase</ion-label>
-      <ion-input [(ngModel)]="nuevaFrase" placeholder="Escriba la frase"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Autor</ion-label>
-      <ion-input [(ngModel)]="nuevoAutor" placeholder="Nombre del autor"></ion-input>
-    </ion-item>
-    <ion-button expand="block" (click)="agregar()" [disabled]="!nuevaFrase || !nuevoAutor">
-      Agregar Cita
-    </ion-button>
-  </ion-card-content>
+  <ion-item>
+    <ion-input label="Cita" [(ngModel)]="frase"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input label="Autor" [(ngModel)]="autor"></ion-input>
+  </ion-item>
+  <ion-button expand="block" (click)="ejecutarAgregar()">Guardar</ion-button>
 </ion-card>

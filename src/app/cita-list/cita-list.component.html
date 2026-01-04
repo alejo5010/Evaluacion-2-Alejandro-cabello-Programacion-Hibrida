@@ -1,16 +1,12 @@
-<ion-list>
-  <ion-item-sliding *ngFor="let cita of citas">
-    <ion-item>
-      <ion-label>
-        <h2>"{{ cita.frase }}"</h2>
-        <p>- {{ cita.autor }}</p>
-      </ion-label>
-    </ion-item>
 
-    <ion-item-options side="end">
-      <ion-item-option color="danger" (click)="eliminar(cita)">
-        <ion-icon slot="icon-only" name="trash"></ion-icon>
-      </ion-item-option>
-    </ion-item-options>
-  </ion-item-sliding>
+<ion-list>
+  <ion-item *ngFor="let c of lista">
+    <ion-label>
+      <h2>"{{ c.frase }}"</h2>
+      <p>- {{ c.autor }}</p>
+    </ion-label>
+    <ion-button slot="end" color="danger" (click)="borrar(c)">
+      <ion-icon name="trash"></ion-icon>
+    </ion-button>
+  </ion-item>
 </ion-list>
