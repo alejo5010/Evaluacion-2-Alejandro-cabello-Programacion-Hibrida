@@ -1,0 +1,12 @@
+
+<ion-list>
+  <ion-item *ngFor="let c of lista">
+    <ion-label>
+      <h2>"{{ c.frase }}"</h2>
+      <p>- {{ c.autor }}</p>
+    </ion-label>
+    <ion-button slot="end" color="danger" (click)="borrar(c)">
+      <ion-icon name="trash"></ion-icon>
+    </ion-button>
+  </ion-item>
+</ion-list>
