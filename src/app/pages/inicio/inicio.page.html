@@ -13,11 +13,13 @@
     </ion-card-header>
   </ion-card>
 
-  <p *ngIf="!citaAleatoria">No hay citas. Ve a gestión para agregar una.</p>
+  <div *ngIf="!citaAleatoria" class="ion-padding">
+    <p>Cargando citas...</p>
+  </div>
 
   <div *ngIf="citasService.borrarEnInicio && citaAleatoria">
-    <ion-button color="danger" (click)="borrarCitaActual()">
-      <ion-icon name="trash" slot="start"></ion-icon>
+    <ion-button color="danger" fill="outline" (click)="borrarCitaActual()" style="margin-bottom: 20px;">
+      <ion-icon name="trash-outline" slot="start"></ion-icon>
       ELIMINAR ESTA CITA
     </ion-button>
   </div>

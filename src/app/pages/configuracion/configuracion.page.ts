@@ -1,21 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonToggle, IonLabel, IonItem, IonList } from '@ionic/angular/standalone';
+import { IonicModule } from '@ionic/angular';
+import { CitasService } from '../../services/citas.service';
 
 @Component({
   selector: 'app-configuracion',
   templateUrl: './configuracion.page.html',
-  styleUrls: ['./configuracion.page.scss'],
   standalone: true,
-  imports: [IonList, IonItem, IonLabel, IonToggle, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule]
 })
-export class ConfiguracionPage implements OnInit {
-citasService: any;
+export class ConfiguracionPage {
 
-  constructor() { }
+  constructor(public citasService: CitasService) { }
 
-  ngOnInit() {
+  // Cuando mueves el switch, se guarda el valor en el storage
+  guardarCambio(evento: any) {
+    const valor = evento.detail.checked;
+    this.citasService.actualizarConfig(valor);
   }
-
 }
