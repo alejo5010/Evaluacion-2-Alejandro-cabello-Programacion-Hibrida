@@ -6,10 +6,7 @@ import { Preferences } from '@capacitor/preferences';
   providedIn: 'root'
 })
 export class CitasService {
-  agregarCita(evento: any) {
-    throw new Error('Method not implemented.');
-  }
-  public listaCitas: Cita[] = [];
+  private listaCitas: Cita[] = [];
   public borrarEnInicio: boolean = false;
 
   constructor() {
@@ -17,32 +14,34 @@ export class CitasService {
   }
 
   async cargarTodo() {
+    // 1. Cargar Configuración del Switch
     const config = await Preferences.get({ key: 'config_borrar' });
     this.borrarEnInicio = config.value ? JSON.parse(config.value) : false;
 
+    // 2. Cargar Citas
     const datos = await Preferences.get({ key: 'mis_citas' });
     if (datos.value) {
       this.listaCitas = JSON.parse(datos.value);
     } else {
-      // 10 Citas al azar para cumplir con lo pedido
+      // 10 Citas iniciales para que la app no parta vacía
       this.listaCitas = [
-        { frase: "Pienso, luego existo", autor: "René Descartes" },
-        { frase: "La paz es el camino", autor: "Mahatma Gandhi" },
-        { frase: "El éxito es ir de fracaso en fracaso sin desesperarse", autor: "Winston Churchill" },
+        { frase: "El éxito consiste en ir de fracaso en fracaso", autor: "Churchill" },
+        { frase: "Pienso, luego existo", autor: "Descartes" },
+        { frase: "La paz comienza con una sonrisa", autor: "Teresa de Calcuta" },
         { frase: "Solo sé que nada sé", autor: "Sócrates" },
-        { frase: "La imaginación es más importante que el conocimiento", autor: "Albert Einstein" },
-        { frase: "No cuentes los días, haz que los días cuenten", autor: "Muhammad Ali" },
-        { frase: "La vida es lo que pasa mientras haces otros planes", autor: "John Lennon" },
-        { frase: "Haz de cada día tu obra maestra", autor: "John Wooden" },
-        { frase: "La mejor forma de predecir el futuro es creándolo", autor: "Peter Drucker" },
-        { frase: "Sé el cambio que quieres ver en el mundo", autor: "Mahatma Gandhi" }
+        { frase: "La imaginación lo es todo", autor: "Einstein" },
+        { frase: "Hazlo o no lo hagas, pero no lo intentes", autor: "Yoda" },
+        { frase: "El conocimiento es poder", autor: "Francis Bacon" },
+        { frase: "Veni, vidi, vici", autor: "Julio César" },
+        { frase: "La libertad es el derecho a decir lo que otros no quieren oír", autor: "Orwell" },
+        { frase: "Un viaje de mil millas comienza con un paso", autor: "Lao Tsé" }
       ];
-      await this.guardarCitas();
+      await this.guardarEnMemoria();
     }
   }
 
-  obtenerCitas(): Cita[] {
-    return this.listaCitas;
+  obtenerCitas() {
+    return [...this.listaCitas]; // Devolvemos una copia para evitar errores de referencia
   }
 
   obtenerCitaAleatoria(): Cita {
@@ -50,16 +49,20 @@ export class CitasService {
     return this.listaCitas[indice];
   }
 
-  async eliminarCita(cita: Cita) {
-    this.listaCitas = this.listaCitas.filter(c => c.frase !== cita.frase);
-    await this.guardarCitas();
+  async agregarCita(nueva: Cita) {
+    this.listaCitas.push(nueva);
+    await this.guardarEnMemoria();
   }
 
-  async guardarCitas() {
+  async eliminarCita(cita: Cita) {
+    this.listaCitas = this.listaCitas.filter(c => c.frase !== cita.frase);
+    await this.guardarEnMemoria();
+  }
+
+  private async guardarEnMemoria() {
     await Preferences.set({ key: 'mis_citas', value: JSON.stringify(this.listaCitas) });
   }
 
-  // Esta función la usará el Switch de Configuración
   async actualizarConfig(valor: boolean) {
     this.borrarEnInicio = valor;
     await Preferences.set({ key: 'config_borrar', value: JSON.stringify(valor) });
